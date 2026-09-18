@@ -1,0 +1,6 @@
+{
+  "name": "SAFA — Personal Life Operating System",
+  "description": "A private, intelligent personal sanctuary to organize thoughts, curate inspiration, track goals, and preserve memories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
