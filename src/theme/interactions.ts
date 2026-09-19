@@ -1,145 +1,163 @@
 /**
- * SAFA (صفا) — Tactile Physics & Soul Layer Interactions
- * Inspired by Linear precision, Apple tactile physics, and calm emotional luxury
+ * SAFA (صفا) — Tactile Physics & Semantic Interactions
+ * Linear-inspired interaction discipline + Apple haptic calibration.
  */
 
-import { TargetAndTransition, Transition, Variants } from 'motion/react';
+import { Variants } from 'motion/react';
+import { springs, eases } from './motion';
+
+export { springs, eases };
 
 // ==========================================
-// 1. SPRING PHYSICS PRESETS
+// 1. TACTILE TAP & PRESS COMPRESSIONS
 // ==========================================
-export const springs = {
-  // Ultra-crisp tactile response for buttons, toggles, badges
-  tactile: {
-    type: 'spring' as const,
-    stiffness: 450,
-    damping: 32,
-    mass: 0.75,
-  },
-  // Snappy response for cards, sheets, drawer expands
-  snappy: {
-    type: 'spring' as const,
-    stiffness: 380,
-    damping: 28,
-    mass: 0.85,
-  },
-  // Gentle, calm luxury response for sanctuary transitions and modals
-  gentle: {
-    type: 'spring' as const,
-    stiffness: 240,
-    damping: 26,
-    mass: 1.0,
-  },
-  // Playful micro-bounce for checkmarks and completion moments
-  bouncy: {
-    type: 'spring' as const,
-    stiffness: 400,
-    damping: 18,
-    mass: 0.6,
-  },
-  // Experience / page change transition
-  experience: {
-    type: 'spring' as const,
-    stiffness: 280,
-    damping: 30,
-    mass: 0.9,
-  },
-};
-
-// ==========================================
-// 2. TAP PHYSICS & CARD COMPRESSIONS
-// ==========================================
-export const tapPhysics: {
-  subtle: TargetAndTransition;
-  standard: TargetAndTransition;
-  cardPress: TargetAndTransition;
-  dockItem: TargetAndTransition;
-  iconButton: TargetAndTransition;
-} = {
-  // Micro-scale for small buttons / tags
+export const tapPhysics = {
+  // Micro-scale for subtle tags, icons, small chips
   subtle: {
-    scale: 0.98,
+    scale: 0.97,
     transition: springs.tactile,
   },
-  // Standard tactile press for primary CTA buttons
+  // Standard compression for primary/secondary buttons
   standard: {
-    scale: 0.965,
-    y: 0.5,
+    scale: 0.96,
     transition: springs.tactile,
   },
-  // Tactile compression for interactive cards & moodboard tiles
+  // Deep card compression for interactive surfaces
   cardPress: {
     scale: 0.985,
     y: 1,
     transition: springs.snappy,
   },
-  // Elastic spring press for dock items
+  // Dock pill item compression
   dockItem: {
     scale: 0.92,
-    transition: springs.bouncy,
+    transition: springs.tactile,
   },
-  // Circular icon buttons
+  // Circular icon action button
   iconButton: {
-    scale: 0.90,
+    scale: 0.88,
+    transition: springs.tactile,
+  },
+  // Destructive press
+  destructive: {
+    scale: 0.95,
     transition: springs.tactile,
   },
 };
 
 // ==========================================
-// 3. CARD HOVER & INTERACTION PROFILES
+// 2. CARD HOVER & ELEVATION PHYSICS
 // ==========================================
 export const cardPhysics = {
   hoverElevated: {
-    y: -3,
+    y: -2,
     transition: springs.snappy,
   },
   hoverSubtle: {
-    y: -1.5,
+    y: -1,
     transition: springs.tactile,
-  },
-  hoverImageZoom: {
-    scale: 1.035,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 // ==========================================
-// 4. EXPERIENCE & PAGE TRANSITIONS
+// 3. SEMANTIC MOTION CATEGORIES
+// ==========================================
+export const motionSemantics = {
+  // Micro: immediate localized state changes
+  micro: {
+    tap: tapPhysics.subtle,
+    transition: springs.tactile,
+  },
+  // Tactile: buttons, controls, toggles
+  tactile: {
+    tap: tapPhysics.standard,
+    transition: springs.tactile,
+  },
+  // Navigation: spatial transition across domains
+  navigation: {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -6 },
+    transition: springs.experience,
+  },
+  // Reveal: stagger and fade-in entry for lists
+  reveal: {
+    initial: { opacity: 0, y: 12 },
+    animate: { opacity: 1, y: 0 },
+    transition: springs.gentle,
+  },
+  // Overlay: dialog and bottom sheet kinetics
+  overlay: {
+    backdrop: {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+      transition: eases.atmospheric,
+    },
+    dialog: {
+      initial: { scale: 0.96, opacity: 0, y: 12 },
+      animate: { scale: 1, opacity: 1, y: 0 },
+      exit: { scale: 0.96, opacity: 0, y: 8 },
+      transition: springs.snappy,
+    },
+    sheet: {
+      initial: { y: '100%', opacity: 0.9 },
+      animate: { y: 0, opacity: 1 },
+      exit: { y: '100%', opacity: 0 },
+      transition: springs.snappy,
+    },
+  },
+  // Completion: subtle celebration feedback
+  completion: {
+    checkmark: {
+      scale: [0.85, 1.2, 1.0],
+      rotate: [0, -6, 0],
+      transition: eases.celebration,
+    },
+    pulseGlow: {
+      scale: [1, 1.02, 1],
+      opacity: [0.9, 1, 0.95],
+      transition: eases.atmospheric,
+    },
+  },
+  // Destructive: minimal, unmistakable negative feedback
+  destructive: {
+    shake: {
+      x: [0, -4, 4, -2, 2, 0],
+      transition: eases.atmospheric,
+    },
+  },
+};
+
+// ==========================================
+// 4. ANIMATION VARIANTS (PAGE / STAGGER)
 // ==========================================
 export const experienceVariants: Variants = {
   initial: {
     opacity: 0,
-    y: 10,
-    filter: 'blur(4px)',
+    y: 8,
   },
   animate: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: {
-      duration: 0.32,
-      ease: [0.22, 1, 0.36, 1],
-      when: 'beforeChildren',
-      staggerChildren: 0.05,
-    },
+    transition: springs.experience,
   },
   exit: {
     opacity: 0,
-    y: -8,
-    filter: 'blur(2px)',
+    y: -6,
     transition: {
-      duration: 0.2,
-      ease: [0.32, 0, 0.67, 0],
+      duration: 0.16,
+      ease: [0.25, 0.1, 0.25, 1.0],
     },
   },
 };
 
-export const staggerContainerVariants: Variants = {
+export const containerStaggerVariants: Variants = {
   initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.04,
+      staggerChildren: 0.05,
+      delayChildren: 0.02,
     },
   },
 };
@@ -157,28 +175,13 @@ export const childFadeUpVariants: Variants = {
 };
 
 // ==========================================
-// 5. COMPLETION & CELEBRATION FEEDBACK
+// 5. BACKWARD-COMPATIBLE COMPLETION EXPORT
 // ==========================================
-export const completionFeedback: {
-  checkmark: TargetAndTransition;
-  pulseGlow: TargetAndTransition;
-  ripple: TargetAndTransition;
-} = {
-  checkmark: {
-    scale: [0.85, 1.2, 1.0],
-    rotate: [0, -6, 0],
-    transition: {
-      duration: 0.36,
-      ease: [0.34, 1.56, 0.64, 1],
-    },
-  },
-  pulseGlow: {
-    scale: [1, 1.02, 1],
-    opacity: [0.9, 1, 0.95],
-    transition: { duration: 0.4, ease: 'easeOut' },
-  },
+export const completionFeedback = {
+  checkmark: motionSemantics.completion.checkmark,
+  pulseGlow: motionSemantics.completion.pulseGlow,
   ripple: {
     scale: [0.95, 1.06, 1],
-    transition: { duration: 0.35, ease: 'easeOut' },
+    transition: eases.atmospheric,
   },
 };

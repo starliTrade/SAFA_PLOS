@@ -38,25 +38,25 @@ export const SafaButton: React.FC<SafaButtonProps> = ({
   ...props
 }) => {
   const baseClasses =
-    'relative inline-flex items-center justify-center font-medium transition-colors cursor-pointer select-none rounded-[13px] disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none whitespace-nowrap focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#C97D60]/40';
+    'relative inline-flex items-center justify-center font-medium transition-colors cursor-pointer select-none rounded-[13px] disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none whitespace-nowrap focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#C97D60]/40 dark:focus-visible:ring-[#D9886C]/50';
 
-  const variantClasses = {
+  const variantClasses: Record<SafaButtonVariant, string> = {
     primary:
-      'bg-[#1E1B18] text-[#FAF8F5] hover:bg-[#2C2723] active:bg-[#151311] shadow-xs border border-[#1E1B18]',
+      'bg-[#1E1B18] dark:bg-[#FAF5EE] text-[#FAF8F5] dark:text-[#13110F] hover:bg-[#2C2723] dark:hover:bg-white active:bg-[#151311] dark:active:bg-[#EAE4DC] shadow-xs border border-[#1E1B18] dark:border-[#FAF5EE]',
     secondary:
-      'bg-[#FAF8F5] text-[#1E1B18] hover:bg-[#F3EFEA] active:bg-[#EAE4DC] border border-[#EAE4DC] shadow-2xs',
+      'bg-[#FAF8F5] dark:bg-[#191614] text-[#1E1B18] dark:text-[#FAF5EE] hover:bg-[#F3EFEA] dark:hover:bg-[#23201C] active:bg-[#EAE4DC] dark:active:bg-[#2C2723] border border-[#EAE4DC] dark:border-[rgba(250,245,238,0.12)] shadow-2xs',
     subtle:
-      'bg-[#F5F1EB] text-[#1E1B18] hover:bg-[#EAE4DC] active:bg-[#DFD8CE] border border-transparent',
+      'bg-[#F5F1EB] dark:bg-[#2C2723] text-[#1E1B18] dark:text-[#FAF5EE] hover:bg-[#EAE4DC] dark:hover:bg-[#3D3833] active:bg-[#DFD8CE] border border-transparent',
     atelier:
-      'bg-[#C97D60] text-white hover:bg-[#B56C50] active:bg-[#A35D43] shadow-xs border border-[#C97D60]',
+      'bg-[#C97D60] dark:bg-[#D9886C] text-white hover:bg-[#B56C50] dark:hover:bg-[#E59B81] active:bg-[#9E583E] shadow-xs border border-[#C97D60] dark:border-[#D9886C]',
     terracotta:
-      'bg-[#F7EDE8] text-[#C97D60] hover:bg-[#F0D5C9] active:bg-[#E8C2B3] border border-[#F0D5C9]',
+      'bg-[#F7EDE8] dark:bg-[rgba(217,136,108,0.16)] text-[#C97D60] dark:text-[#E59B81] hover:bg-[#F0D5C9] dark:hover:bg-[rgba(217,136,108,0.25)] border border-[#F0D5C9] dark:border-[rgba(217,136,108,0.3)]',
     ghost:
-      'bg-transparent text-[#635E59] hover:text-[#1E1B18] hover:bg-[#F3EFEA] active:bg-[#EAE4DC] border border-transparent',
+      'bg-transparent text-[#635E59] dark:text-[#D0C7BC] hover:text-[#1E1B18] dark:hover:text-[#FAF5EE] hover:bg-[#F3EFEA] dark:hover:bg-[#23201C] active:bg-[#EAE4DC] border border-transparent',
     outline:
-      'bg-transparent text-[#1E1B18] hover:bg-[#FAF8F5] active:bg-[#F3EFEA] border border-[#DFD8CE]',
+      'bg-transparent text-[#1E1B18] dark:text-[#FAF5EE] hover:bg-[#FAF8F5] dark:hover:bg-[#23201C] active:bg-[#F3EFEA] border border-[#DFD8CE] dark:border-[rgba(250,245,238,0.16)]',
     danger:
-      'bg-[#FDF2F2] text-[#9B2C2C] hover:bg-[#FDE8E8] active:bg-[#FCD4D4] border border-[#F8D7DA]',
+      'bg-[#FDF2F2] dark:bg-[rgba(155,44,44,0.2)] text-[#9B2C2C] dark:text-[#F8A5A5] hover:bg-[#FDE8E8] dark:hover:bg-[rgba(155,44,44,0.3)] border border-[#F8D7DA] dark:border-[rgba(155,44,44,0.35)]',
   };
 
   const sizeClasses = {

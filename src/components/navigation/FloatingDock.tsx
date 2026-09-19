@@ -8,8 +8,7 @@ import {
   Target,
 } from 'lucide-react';
 import { springs, tapPhysics } from '../../theme/interactions';
-
-export type NavigationDomain = 'sanctuary' | 'atelier' | 'capture' | 'memory' | 'horizon' | 'inspiration';
+import { NavigationDomain } from '../../navigation/navigationTypes';
 
 export interface FloatingDockProps {
   activeDomain: NavigationDomain;
@@ -55,28 +54,28 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
   ];
 
   return (
-    <div className="fixed bottom-5 sm:bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none px-4">
+    <div className="fixed bottom-5 sm:bottom-6 inset-x-0 z-40 flex justify-center pointer-events-none px-4">
       <motion.nav
         initial={{ y: 28, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={springs.snappy}
-        className="pointer-events-auto bg-[#1E1B18]/94 text-[#FAF8F5] backdrop-blur-2xl border border-white/14 shadow-[0_16px_40px_rgba(0,0,0,0.26),0_2px_6px_rgba(0,0,0,0.12)] rounded-full px-2.5 py-1.5 sm:px-3 sm:py-2 flex items-center gap-1 sm:gap-1.5 max-w-fit"
+        className="pointer-events-auto bg-[#1E1B18]/94 dark:bg-[#191614]/94 text-[#FAF8F5] dark:text-[#FAF5EE] backdrop-blur-2xl border border-white/14 dark:border-[rgba(250,245,238,0.14)] shadow-[0_16px_40px_rgba(0,0,0,0.26),0_2px_6px_rgba(0,0,0,0.12)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)] rounded-full px-2.5 py-1.5 sm:px-3 sm:py-2 flex items-center gap-1 sm:gap-1.5 max-w-fit"
       >
         {/* Sanctuary Tab */}
         <motion.button
           whileTap={tapPhysics.dockItem}
           onClick={() => onSelectDomain('sanctuary')}
           aria-label="Sanctuary"
-          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none ${
+          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none min-h-[44px] justify-center ${
             activeDomain === 'sanctuary'
               ? 'text-white'
-              : 'text-[#9E968D] hover:text-[#FAF8F5]'
+              : 'text-[#9E968D] dark:text-[#7D756C] hover:text-[#FAF8F5] dark:hover:text-[#FAF5EE]'
           }`}
         >
           {activeDomain === 'sanctuary' && (
             <motion.div
               layoutId="dock-active-indicator"
-              className="absolute inset-0 bg-white/16 rounded-full border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
+              className="absolute inset-0 bg-white/16 dark:bg-white/12 rounded-full border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
               transition={springs.tactile}
             />
           )}
@@ -86,21 +85,21 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
           </span>
         </motion.button>
 
-        {/* Atelier Tab (with Inspiration sub-indicator) */}
+        {/* Atelier Tab (with Discovery sub-indicator) */}
         <motion.button
           whileTap={tapPhysics.dockItem}
           onClick={() => onSelectDomain('atelier')}
           aria-label="Atelier"
-          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none ${
-            activeDomain === 'atelier' || activeDomain === 'inspiration'
+          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none min-h-[44px] justify-center ${
+            activeDomain === 'atelier' || activeDomain === 'discovery'
               ? 'text-white'
-              : 'text-[#9E968D] hover:text-[#FAF8F5]'
+              : 'text-[#9E968D] dark:text-[#7D756C] hover:text-[#FAF8F5] dark:hover:text-[#FAF5EE]'
           }`}
         >
-          {(activeDomain === 'atelier' || activeDomain === 'inspiration') && (
+          {(activeDomain === 'atelier' || activeDomain === 'discovery') && (
             <motion.div
               layoutId="dock-active-indicator"
-              className="absolute inset-0 bg-[#C97D60] rounded-full border border-white/20 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)]"
+              className="absolute inset-0 bg-[#C97D60] dark:bg-[#D9886C] rounded-full border border-white/20 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25)]"
               transition={springs.tactile}
             />
           )}
@@ -117,7 +116,7 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
           transition={springs.bouncy}
           onClick={onOpenQuickCapture}
           aria-label="Quick Capture Thought, Look, or Fabric"
-          className="mx-1 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#FAF8F5] text-[#1E1B18] hover:bg-white active:bg-[#EAE4DC] shadow-[0_2px_8px_rgba(0,0,0,0.18)] flex items-center justify-center cursor-pointer select-none border border-white/40"
+          className="mx-1 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#FAF8F5] dark:bg-[#FAF5EE] text-[#1E1B18] dark:text-[#13110F] hover:bg-white active:bg-[#EAE4DC] shadow-[0_2px_8px_rgba(0,0,0,0.18)] flex items-center justify-center cursor-pointer select-none border border-white/40 min-h-[40px] min-w-[40px]"
         >
           <Plus size={19} strokeWidth={2.6} />
         </motion.button>
@@ -127,16 +126,16 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
           whileTap={tapPhysics.dockItem}
           onClick={() => onSelectDomain('memory')}
           aria-label="Memory Archive"
-          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none ${
+          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none min-h-[44px] justify-center ${
             activeDomain === 'memory'
               ? 'text-white'
-              : 'text-[#9E968D] hover:text-[#FAF8F5]'
+              : 'text-[#9E968D] dark:text-[#7D756C] hover:text-[#FAF8F5] dark:hover:text-[#FAF5EE]'
           }`}
         >
           {activeDomain === 'memory' && (
             <motion.div
               layoutId="dock-active-indicator"
-              className="absolute inset-0 bg-white/16 rounded-full border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
+              className="absolute inset-0 bg-white/16 dark:bg-white/12 rounded-full border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
               transition={springs.tactile}
             />
           )}
@@ -151,16 +150,16 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
           whileTap={tapPhysics.dockItem}
           onClick={() => onSelectDomain('horizon')}
           aria-label="Horizon Goals & Milestones"
-          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none ${
+          className={`relative px-3 sm:px-4 py-2 rounded-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-colors cursor-pointer select-none min-h-[44px] justify-center ${
             activeDomain === 'horizon'
               ? 'text-white'
-              : 'text-[#9E968D] hover:text-[#FAF8F5]'
+              : 'text-[#9E968D] dark:text-[#7D756C] hover:text-[#FAF8F5] dark:hover:text-[#FAF5EE]'
           }`}
         >
           {activeDomain === 'horizon' && (
             <motion.div
               layoutId="dock-active-indicator"
-              className="absolute inset-0 bg-white/16 rounded-full border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
+              className="absolute inset-0 bg-white/16 dark:bg-white/12 rounded-full border border-white/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
               transition={springs.tactile}
             />
           )}
@@ -173,3 +172,4 @@ export const FloatingDock: React.FC<FloatingDockProps> = ({
     </div>
   );
 };
+export type { NavigationDomain };

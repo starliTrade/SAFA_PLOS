@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Scissors, Bookmark, CheckCircle2, Image, Type } from 'lucide-react';
+import { Sparkles, Scissors, CheckCircle2 } from 'lucide-react';
 import { SafaModal } from '../ui/SafaModal';
 import { SafaButton } from '../ui/SafaButton';
 import { SafaInput, SafaTextarea } from '../ui/SafaInput';
@@ -105,14 +105,14 @@ export const QuickCaptureModal: React.FC<QuickCaptureModalProps> = ({
     >
       <div className="space-y-4 text-left">
         {/* Type selector */}
-        <div className="flex items-center gap-1.5 p-1 bg-[#F3EFEA] rounded-full border border-[#EAE4DC]">
+        <div className="flex items-center gap-1.5 p-1 bg-[#F3EFEA] dark:bg-[#191614] rounded-full border border-[#EAE4DC] dark:border-[rgba(250,245,238,0.1)]">
           <button
             type="button"
             onClick={() => setCaptureType('intention')}
             className={`flex-1 py-1.5 rounded-full text-[12px] font-medium transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
               captureType === 'intention'
-                ? 'bg-white text-[#1E1B18] shadow-xs'
-                : 'text-[#635E59]'
+                ? 'bg-white dark:bg-[#2C2723] text-[#1E1B18] dark:text-[#FAF5EE] shadow-xs'
+                : 'text-[#635E59] dark:text-[#9E968D]'
             }`}
           >
             <CheckCircle2 size={13} />
@@ -124,8 +124,8 @@ export const QuickCaptureModal: React.FC<QuickCaptureModalProps> = ({
             onClick={() => setCaptureType('design_idea')}
             className={`flex-1 py-1.5 rounded-full text-[12px] font-medium transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
               captureType === 'design_idea'
-                ? 'bg-white text-[#1E1B18] shadow-xs'
-                : 'text-[#635E59]'
+                ? 'bg-white dark:bg-[#2C2723] text-[#1E1B18] dark:text-[#FAF5EE] shadow-xs'
+                : 'text-[#635E59] dark:text-[#9E968D]'
             }`}
           >
             <Scissors size={13} />
@@ -137,8 +137,8 @@ export const QuickCaptureModal: React.FC<QuickCaptureModalProps> = ({
             onClick={() => setCaptureType('inspiration')}
             className={`flex-1 py-1.5 rounded-full text-[12px] font-medium transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
               captureType === 'inspiration'
-                ? 'bg-white text-[#1E1B18] shadow-xs'
-                : 'text-[#635E59]'
+                ? 'bg-white dark:bg-[#2C2723] text-[#1E1B18] dark:text-[#FAF5EE] shadow-xs'
+                : 'text-[#635E59] dark:text-[#9E968D]'
             }`}
           >
             <Sparkles size={13} />

@@ -8,7 +8,6 @@ import {
   ArrowRight,
   Sun,
   Coffee,
-  Layers,
 } from 'lucide-react';
 import { useStateContext } from '../../context/StateContext';
 import { SafaButton } from '../../components/ui/SafaButton';
@@ -30,7 +29,6 @@ export interface MorningExperienceProps {
 
 export const MorningExperience: React.FC<MorningExperienceProps> = ({
   onEnterCreative,
-  onEnterDiscovery,
 }) => {
   const {
     userProfile,
@@ -81,26 +79,26 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
       className="space-y-6 pb-28 max-w-4xl mx-auto text-left"
     >
       {/* 1. EDITORIAL MORNING CENTERING HERO */}
-      <div className="space-y-2 border-b border-[#EAE4DC] pb-5">
+      <div className="space-y-2 border-b border-[#EAE4DC] dark:border-[rgba(250,245,238,0.08)] pb-5">
         <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#C97D60] bg-[#F7EDE8] px-2.5 py-0.5 rounded-full border border-[#F0D5C9] inline-flex items-center gap-1.5">
-            <Sun size={12} className="text-[#C97D60]" />
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#C97D60] dark:text-[#E59B81] bg-[#F7EDE8] dark:bg-[rgba(217,136,108,0.18)] px-2.5 py-0.5 rounded-full border border-[#F0D5C9] dark:border-[rgba(217,136,108,0.3)] inline-flex items-center gap-1.5">
+            <Sun size={12} className="text-[#C97D60] dark:text-[#E59B81]" />
             Morning Centering • حضور صبحگاهی
           </span>
-          <span className="text-[12px] text-[#9E968D] font-mono">
+          <span className="text-[12px] text-[#9E968D] dark:text-[#7D756C] font-mono">
             08:30 AM
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-editorial font-normal text-[#1E1B18] tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-editorial font-normal text-[#1E1B18] dark:text-[#FAF5EE] tracking-tight">
           Sobh bekheir, {userProfile.name}.
         </h1>
 
-        <p className="text-[14px] text-[#635E59] leading-relaxed max-w-xl">
+        <p className="text-[14px] text-[#635E59] dark:text-[#D0C7BC] leading-relaxed max-w-xl">
           Begin with still mind, warm tea, and deliberate drape calibration for your senior collection.
         </p>
 
-        <span className="text-[13px] text-[#7D756C] font-persian block" dir="rtl">
+        <span className="text-[13px] text-[#7D756C] dark:text-[#9E968D] font-persian block" dir="rtl">
           «صبح فرصتی است برای تمرکز بر فرم، آرامش ذهن و لمس تار و پود کارگاه.»
         </span>
       </div>
@@ -113,14 +111,14 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
           <SafaCard variant="elevated" className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-[10px] bg-[#FAF8F5] border border-[#EAE4DC] flex items-center justify-center text-[#C97D60] shadow-2xs">
+                <div className="w-8 h-8 rounded-[10px] bg-[#FAF8F5] dark:bg-[#23201C] border border-[#EAE4DC] dark:border-[rgba(250,245,238,0.1)] flex items-center justify-center text-[#C97D60] dark:text-[#D9886C] shadow-2xs">
                   <Sparkles size={15} />
                 </div>
                 <div>
-                  <h3 className="text-[16px] font-semibold text-[#1E1B18] leading-tight">
+                  <h3 className="text-[16px] font-semibold text-[#1E1B18] dark:text-[#FAF5EE] leading-tight">
                     Studio Intentions
                   </h3>
-                  <span className="text-[11px] text-[#9E968D]">
+                  <span className="text-[11px] text-[#9E968D] dark:text-[#7D756C]">
                     {dailyIntentions.filter((i) => i.completed).length}/{dailyIntentions.length} completed
                   </span>
                 </div>
@@ -145,14 +143,14 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
                   exit={{ opacity: 0, height: 0 }}
                   transition={springs.snappy}
                   onSubmit={handleAddIntention}
-                  className="p-3 bg-[#FAF8F5] rounded-[14px] border border-[#EAE4DC] flex items-center gap-2 overflow-hidden"
+                  className="p-3 bg-[#FAF8F5] dark:bg-[#191614] rounded-[14px] border border-[#EAE4DC] dark:border-[rgba(250,245,238,0.12)] flex items-center gap-2 overflow-hidden"
                 >
                   <input
                     type="text"
                     placeholder="e.g. Drape prototype toile for Look 03..."
                     value={newIntentionText}
                     onChange={(e) => setNewIntentionText(e.target.value)}
-                    className="flex-1 bg-transparent text-[13px] text-[#1E1B18] placeholder-[#9E968D] outline-none"
+                    className="flex-1 bg-transparent text-[13px] text-[#1E1B18] dark:text-[#FAF5EE] placeholder-[#9E968D] dark:placeholder-[#7D756C] outline-none"
                     autoFocus
                   />
                   <SafaButton variant="atelier" size="xs" type="submit">
@@ -178,16 +176,16 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
                   onClick={() => toggleIntention(intent.id)}
                   className={`p-3.5 rounded-[14px] border transition-colors cursor-pointer flex items-start gap-3 select-none ${
                     intent.completed
-                      ? 'bg-[#FAF8F5]/60 border-[#EAE4DC] opacity-75'
-                      : 'bg-[#FAF8F5] border-[#EAE4DC] hover:border-[#D5CDC2]'
+                      ? 'bg-[#FAF8F5]/60 dark:bg-[#191614]/40 border-[#EAE4DC] dark:border-[rgba(250,245,238,0.06)] opacity-75'
+                      : 'bg-[#FAF8F5] dark:bg-[#191614] border-[#EAE4DC] dark:border-[rgba(250,245,238,0.1)] hover:border-[#D5CDC2] dark:hover:border-[rgba(250,245,238,0.2)]'
                   }`}
                 >
                   <motion.button
                     animate={intent.completed ? completionFeedback.checkmark : { scale: 1 }}
                     className={`mt-0.5 shrink-0 transition-colors cursor-pointer ${
                       intent.completed
-                        ? 'text-[#5C6F59]'
-                        : 'text-[#9E968D] hover:text-[#C97D60]'
+                        ? 'text-[#5C6F59] dark:text-[#72896E]'
+                        : 'text-[#9E968D] dark:text-[#7D756C] hover:text-[#C97D60]'
                     }`}
                   >
                     {intent.completed ? <CheckCircle2 size={18} /> : <Circle size={18} />}
@@ -197,8 +195,8 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
                     <p
                       className={`text-[13px] font-medium leading-snug transition-all ${
                         intent.completed
-                          ? 'line-through text-[#9E968D]'
-                          : 'text-[#1E1B18]'
+                          ? 'line-through text-[#9E968D] dark:text-[#7D756C]'
+                          : 'text-[#1E1B18] dark:text-[#FAF5EE]'
                       }`}
                     >
                       {intent.text}
@@ -206,7 +204,7 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
                     {intent.persianText && (
                       <span
                         className={`text-[11px] font-persian block transition-all ${
-                          intent.completed ? 'text-[#B5ACA1]' : 'text-[#7D756C]'
+                          intent.completed ? 'text-[#B5ACA1] dark:text-[#524B44]' : 'text-[#7D756C] dark:text-[#9E968D]'
                         }`}
                         dir="rtl"
                       >
@@ -230,22 +228,22 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
           {activeProject && (
             <SafaCard
               variant="elevated"
-              className="bg-gradient-to-br from-[#FAF6F0] via-white to-[#FAF6F0] space-y-4"
+              className="bg-gradient-to-br from-[#FAF6F0] via-white to-[#FAF6F0] dark:from-[#23201C] dark:via-[#191614] dark:to-[#23201C] space-y-4"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#C97D60]">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#C97D60] dark:text-[#E59B81]">
                       Active Thesis Capsule
                     </span>
                     <SafaBadge variant="active" size="sm">
                       {activeProject.status}
                     </SafaBadge>
                   </div>
-                  <h3 className="text-[19px] font-semibold text-[#1E1B18] tracking-tight">
+                  <h3 className="text-[19px] font-semibold text-[#1E1B18] dark:text-[#FAF5EE] tracking-tight">
                     {activeProject.title}
                   </h3>
-                  <span className="text-[13px] text-[#7D756C] font-persian block" dir="rtl">
+                  <span className="text-[13px] text-[#7D756C] dark:text-[#9E968D] font-persian block" dir="rtl">
                     {activeProject.persianTitle}
                   </span>
                 </div>
@@ -261,8 +259,8 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
               </div>
 
               {/* Harmonized Mineral Palette Bar */}
-              <div className="flex items-center justify-between p-3 rounded-[13px] bg-white/85 border border-[#EAE4DC]">
-                <span className="text-[11px] font-medium text-[#635E59]">
+              <div className="flex items-center justify-between p-3 rounded-[13px] bg-white/85 dark:bg-[#191614]/85 border border-[#EAE4DC] dark:border-[rgba(250,245,238,0.1)]">
+                <span className="text-[11px] font-medium text-[#635E59] dark:text-[#D0C7BC]">
                   Architectural Mineral Palette
                 </span>
                 <ColorPaletteBar palette={activeProject.palette} size="sm" />
@@ -276,10 +274,10 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
           {/* CREATIVE FREQUENCY CHECK-IN */}
           <SafaCard variant="elevated" className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9E968D]">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9E968D] dark:text-[#7D756C]">
                 Creative Energy
               </span>
-              <span className="text-[11px] font-mono font-semibold text-[#C97D60]">
+              <span className="text-[11px] font-mono font-semibold text-[#C97D60] dark:text-[#D9886C]">
                 Level {moodLevel}/5
               </span>
             </div>
@@ -291,7 +289,7 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
               onChange={setMoodLevel}
             />
 
-            <p className="text-[12px] text-[#5C6F59] font-medium text-center pt-0.5">
+            <p className="text-[12px] text-[#5C6F59] dark:text-[#72896E] font-medium text-center pt-0.5">
               {getMoodLabel(moodLevel)}
             </p>
           </SafaCard>
@@ -299,8 +297,8 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
           {/* MORNING RITUALS */}
           <SafaCard variant="elevated" className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9E968D] flex items-center gap-1.5">
-                <Coffee size={13} className="text-[#C97D60]" />
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#9E968D] dark:text-[#7D756C] flex items-center gap-1.5">
+                <Coffee size={13} className="text-[#C97D60] dark:text-[#D9886C]" />
                 Morning Centering
               </span>
             </div>
@@ -313,21 +311,23 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
                   onClick={() => toggleRitual(ritual.id)}
                   className={`p-3 rounded-[13px] border flex items-center justify-between transition-colors cursor-pointer select-none ${
                     ritual.completed
-                      ? 'bg-[#EEF3EE]/60 border-[#CDE0CC]'
-                      : 'bg-[#FAF8F5] border-[#EAE4DC] hover:border-[#D5CDC2]'
+                      ? 'bg-[#EEF3EE]/60 dark:bg-[rgba(114,137,110,0.18)] border-[#CDE0CC] dark:border-[rgba(114,137,110,0.3)]'
+                      : 'bg-[#FAF8F5] dark:bg-[#191614] border-[#EAE4DC] dark:border-[rgba(250,245,238,0.1)] hover:border-[#D5CDC2] dark:hover:border-[rgba(250,245,238,0.2)]'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Sun size={15} className="text-[#D4AF37] shrink-0" />
+                    <Sun size={15} className="text-[#D4AF37] dark:text-[#DFC065] shrink-0" />
                     <div>
                       <h5
                         className={`text-[12px] font-medium leading-snug ${
-                          ritual.completed ? 'line-through text-[#635E59]' : 'text-[#1E1B18]'
+                          ritual.completed
+                            ? 'line-through text-[#635E59] dark:text-[#7D756C]'
+                            : 'text-[#1E1B18] dark:text-[#FAF5EE]'
                         }`}
                       >
                         {ritual.title}
                       </h5>
-                      <span className="text-[10px] text-[#7D756C] font-persian block" dir="rtl">
+                      <span className="text-[10px] text-[#7D756C] dark:text-[#9E968D] font-persian block" dir="rtl">
                         {ritual.persianTitle}
                       </span>
                     </div>
@@ -335,7 +335,7 @@ export const MorningExperience: React.FC<MorningExperienceProps> = ({
 
                   <motion.button
                     animate={ritual.completed ? completionFeedback.checkmark : { scale: 1 }}
-                    className={ritual.completed ? 'text-[#5C6F59]' : 'text-[#9E968D]'}
+                    className={ritual.completed ? 'text-[#5C6F59] dark:text-[#72896E]' : 'text-[#9E968D] dark:text-[#7D756C]'}
                   >
                     {ritual.completed ? <CheckCircle2 size={16} /> : <Circle size={16} />}
                   </motion.button>

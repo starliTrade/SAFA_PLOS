@@ -28,15 +28,15 @@ export const SafaSlider: React.FC<SafaSliderProps> = ({
   return (
     <div className={`w-full space-y-2 text-left ${className}`}>
       {(label || valueLabel) && (
-        <div className="flex items-center justify-between text-[12px] font-medium text-[#635E59]">
+        <div className="flex items-center justify-between text-[12px] font-medium text-[#635E59] dark:text-[#D0C7BC]">
           <div className="flex items-center gap-2">
             <span>{label}</span>
             {persianLabel && (
-              <span className="font-persian text-[#7D756C] text-[11px]">{persianLabel}</span>
+              <span className="font-persian text-[#7D756C] dark:text-[#9E968D] text-[11px]">{persianLabel}</span>
             )}
           </div>
           {valueLabel && (
-            <span className="text-[#C97D60] font-semibold">{valueLabel}</span>
+            <span className="text-[#C97D60] dark:text-[#D9886C] font-semibold">{valueLabel}</span>
           )}
         </div>
       )}
@@ -49,9 +49,9 @@ export const SafaSlider: React.FC<SafaSliderProps> = ({
           step={step}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="w-full h-2 bg-[#EAE4DC] rounded-full appearance-none cursor-pointer accent-[#C97D60] focus:outline-none"
+          className="w-full h-2 bg-[#EAE4DC] dark:bg-[#2C2723] rounded-full appearance-none cursor-pointer accent-[#C97D60] dark:accent-[#D9886C] focus:outline-hidden"
           style={{
-            background: `linear-gradient(to right, #C97D60 0%, #C97D60 ${percentage}%, #EAE4DC ${percentage}%, #EAE4DC 100%)`,
+            background: `linear-gradient(to right, #C97D60 0%, #C97D60 ${percentage}%, var(--safa-border-subtle) ${percentage}%, var(--safa-border-subtle) 100%)`,
           }}
         />
       </div>

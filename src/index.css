@@ -2,26 +2,125 @@
 
 @layer base {
   :root {
-    --font-editorial: 'Cormorant Garamond', serif;
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
-    --font-persian: 'Vazirmatn', sans-serif;
+    --font-editorial: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-persian: 'Vazirmatn', -apple-system, system-ui, sans-serif;
+
+    /* Light Theme Semantic CSS Variables */
+    --safa-bg-canvas: #FAF8F5;
+    --safa-bg-surface: #FFFFFF;
+    --safa-bg-surface-raised: #FCFAF7;
+    --safa-bg-surface-subtle: #F5F1EB;
+    --safa-bg-surface-inset: #EFEAE1;
+    --safa-bg-surface-highlight: #FAF2EE;
+    --safa-bg-overlay: rgba(30, 27, 24, 0.45);
+    --safa-bg-dock: rgba(30, 27, 24, 0.94);
+
+    --safa-content-primary: #1E1B18;
+    --safa-content-secondary: #635E59;
+    --safa-content-tertiary: #7D756C;
+    --safa-content-muted: #9E968D;
+    --safa-content-subtle: #C4BEB5;
+    --safa-content-inverse: #FAF8F5;
+    --safa-content-accent: #C97D60;
+
+    --safa-border-subtle: #EAE4DC;
+    --safa-border-default: #DFD8CE;
+    --safa-border-strong: #C4BEB5;
+    --safa-border-focus: #C97D60;
+    --safa-border-selected: #C97D60;
+
+    --safa-accent-primary: #C97D60;
+    --safa-accent-primary-subtle: #F7EDE8;
+    --safa-accent-primary-hover: #B56C50;
+    --safa-accent-primary-content: #FFFFFF;
+
+    --safa-accent-secondary: #5C6F59;
+    --safa-accent-secondary-subtle: #EEF3EE;
+    --safa-accent-secondary-hover: #4A5B47;
+    --safa-accent-secondary-content: #FFFFFF;
+
+    --safa-accent-gold: #D4AF37;
+    --safa-accent-gold-subtle: #FBF6E9;
+    --safa-accent-gold-content: #9B7B1D;
+
+    --safa-accent-turquoise: #2A4B56;
+    --safa-accent-turquoise-subtle: #E8EFF1;
+    --safa-accent-turquoise-content: #FFFFFF;
+
+    --safa-shadow-subtle: 0 1px 2px rgba(30, 27, 24, 0.03);
+    --safa-shadow-surface: 0 1px 3px rgba(30, 27, 24, 0.03), 0 4px 12px rgba(30, 27, 24, 0.03);
+    --safa-shadow-raised: 0 8px 24px rgba(30, 27, 24, 0.06), 0 2px 6px rgba(30, 27, 24, 0.02);
+    --safa-shadow-floating: 0 16px 40px rgba(30, 27, 24, 0.12), 0 4px 12px rgba(30, 27, 24, 0.04);
+    --safa-shadow-overlay: 0 24px 64px rgba(30, 27, 24, 0.22);
+  }
+
+  /* Genuine Dark Theme (Deep Warm Obsidian Sanctuary) */
+  .dark {
+    --safa-bg-canvas: #13110F;
+    --safa-bg-surface: #191614;
+    --safa-bg-surface-raised: #23201C;
+    --safa-bg-surface-subtle: #2C2723;
+    --safa-bg-surface-inset: #0E0C0B;
+    --safa-bg-surface-highlight: #33231D;
+    --safa-bg-overlay: rgba(0, 0, 0, 0.72);
+    --safa-bg-dock: rgba(25, 22, 20, 0.94);
+
+    --safa-content-primary: #FAF5EE;
+    --safa-content-secondary: #D0C7BC;
+    --safa-content-tertiary: #9E968D;
+    --safa-content-muted: #7D756C;
+    --safa-content-subtle: #524B44;
+    --safa-content-inverse: #13110F;
+    --safa-content-accent: #D9886C;
+
+    --safa-border-subtle: rgba(250, 245, 238, 0.08);
+    --safa-border-default: rgba(250, 245, 238, 0.14);
+    --safa-border-strong: rgba(250, 245, 238, 0.24);
+    --safa-border-focus: #D9886C;
+    --safa-border-selected: #D9886C;
+
+    --safa-accent-primary: #D9886C;
+    --safa-accent-primary-subtle: rgba(217, 136, 108, 0.16);
+    --safa-accent-primary-hover: #E59B81;
+    --safa-accent-primary-content: #FFFFFF;
+
+    --safa-accent-secondary: #72896E;
+    --safa-accent-secondary-subtle: rgba(114, 137, 110, 0.16);
+    --safa-accent-secondary-hover: #869F82;
+    --safa-accent-secondary-content: #FFFFFF;
+
+    --safa-accent-gold: #DFC065;
+    --safa-accent-gold-subtle: rgba(223, 192, 101, 0.14);
+    --safa-accent-gold-content: #DFC065;
+
+    --safa-accent-turquoise: #4E7784;
+    --safa-accent-turquoise-subtle: rgba(78, 119, 132, 0.2);
+    --safa-accent-turquoise-content: #E8EFF1;
+
+    --safa-shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --safa-shadow-surface: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.45);
+    --safa-shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+    --safa-shadow-floating: 0 16px 40px rgba(0, 0, 0, 0.65), 0 4px 12px rgba(0, 0, 0, 0.45);
+    --safa-shadow-overlay: 0 24px 64px rgba(0, 0, 0, 0.85);
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: #FAF8F5;
-    color: #1E1B18;
+    background-color: var(--safa-bg-canvas);
+    color: var(--safa-content-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 }
 
 .font-editorial {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-editorial);
 }
 
 .font-persian {
-  font-family: 'Vazirmatn', system-ui, sans-serif;
+  font-family: var(--font-persian);
 }
 
 /* Custom smooth scrollbars */
@@ -41,11 +140,11 @@
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #EAE4DC;
+  background: var(--safa-border-subtle);
   border-radius: 9999px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: var(--safa-border-strong);
 }
 
 /* Safe Area Paddings for mobile */
