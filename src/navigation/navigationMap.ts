@@ -1,53 +1,92 @@
 import { NavigationDomain, ExperienceMode, DomainMeta } from './navigationTypes';
 
-export const DOMAIN_REGISTRY: Record<NavigationDomain, DomainMeta> = {
-  sanctuary: {
-    id: 'sanctuary',
-    label: 'Sanctuary',
+export const DOMAIN_REGISTRY: Record<string, DomainMeta> = {
+  home: {
+    id: 'home',
+    label: 'Home',
     persianLabel: 'صفا',
-    description: 'Morning Centering, intentions & studio presence',
-    defaultExperience: 'morning',
+    description: 'Personal space, daily presence & creative pulse',
+  },
+  life: {
+    id: 'life',
+    label: 'Life',
+    persianLabel: 'زندگی',
+    description: 'Intentions, sanctuary rituals & long-term horizons',
+  },
+  create: {
+    id: 'create',
+    label: 'Create',
+    persianLabel: 'کارگاه',
+    description: 'Fashion capsules, garment silhouettes & technical draping',
+    defaultExperience: 'creative',
+  },
+  media: {
+    id: 'media',
+    label: 'Media',
+    persianLabel: 'الهامات',
+    description: 'Sensorial universe, textile library & color palettes',
+    defaultExperience: 'discovery',
+  },
+  discover: {
+    id: 'discover',
+    label: 'Discover',
+    persianLabel: 'کاوش',
+    description: 'Cultural research, architectural textures & historical studies',
+    defaultExperience: 'discovery',
+  },
+  more: {
+    id: 'more',
+    label: 'More',
+    persianLabel: 'بیشتر',
+    description: 'Memories archive, personal reflection & system settings',
+    defaultExperience: 'reflection',
+  },
+
+  // Aliases for backward compatibility
+  sanctuary: {
+    id: 'home',
+    label: 'Home',
+    persianLabel: 'صفا',
+    description: 'Personal space, daily presence & creative pulse',
   },
   atelier: {
-    id: 'atelier',
-    label: 'Atelier',
+    id: 'create',
+    label: 'Create',
     persianLabel: 'کارگاه',
-    description: 'Fashion capsules, draping specs & garment silhouettes',
+    description: 'Fashion capsules, garment silhouettes & technical draping',
     defaultExperience: 'creative',
   },
   discovery: {
-    id: 'discovery',
-    label: 'Discovery',
-    persianLabel: 'الهام',
-    description: 'Sensorial inspiration universe, Grand Bazaar textiles & palette matrices',
+    id: 'discover',
+    label: 'Discover',
+    persianLabel: 'کاوش',
+    description: 'Cultural research, architectural textures & historical studies',
     defaultExperience: 'discovery',
   },
   memory: {
-    id: 'memory',
-    label: 'Memory',
-    persianLabel: 'خاطره',
-    description: 'Resurfaced sensorial archives & evening stillness',
+    id: 'more',
+    label: 'More',
+    persianLabel: 'بیشتر',
+    description: 'Memories archive, personal reflection & system settings',
     defaultExperience: 'reflection',
   },
   horizon: {
-    id: 'horizon',
-    label: 'Horizon',
-    persianLabel: 'افق',
-    description: 'Quarterly milestones, thesis goals & creative horizon',
+    id: 'life',
+    label: 'Life',
+    persianLabel: 'زندگی',
+    description: 'Intentions, sanctuary rituals & long-term horizons',
   },
 };
 
 export const EXPERIENCE_TO_DOMAIN_MAP: Record<ExperienceMode, NavigationDomain> = {
-  morning: 'sanctuary',
-  creative: 'atelier',
-  discovery: 'discovery',
-  reflection: 'memory',
+  morning: 'home',
+  creative: 'create',
+  discovery: 'discover',
+  reflection: 'more',
 };
 
-export const DOMAIN_TO_EXPERIENCE_MAP: Record<NavigationDomain, ExperienceMode> = {
-  sanctuary: 'morning',
-  atelier: 'creative',
-  discovery: 'discovery',
-  memory: 'reflection',
-  horizon: 'morning', // fallback if experience mode requested from horizon
+export const DOMAIN_TO_EXPERIENCE_MAP: Partial<Record<NavigationDomain, ExperienceMode>> = {
+  create: 'creative',
+  discover: 'discovery',
+  more: 'reflection',
 };

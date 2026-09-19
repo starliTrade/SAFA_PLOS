@@ -1,85 +1,78 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AnimatePresence } from 'motion/react';
-import { StateProvider, useStateContext } from './context/StateContext';
+import { StateProvider } from './context/StateContext';
 import { ThemeProvider } from './components/theme/ThemeProvider';
 import { NavigationProvider, useNavigation } from './navigation/NavigationContext';
-import { TopSanctuaryBar } from './components/navigation/TopSanctuaryBar';
-import { FloatingDock } from './components/navigation/FloatingDock';
+import { SafaShell } from './components/shell';
+import { HomeView } from './components/home/HomeView';
+import { LifeView } from './components/life/LifeView';
+import { CreateView } from './components/create/CreateView';
+import { MediaView } from './components/media/MediaView';
+import { DiscoverView } from './components/discover/DiscoverView';
+import { MoreView } from './components/more/MoreView';
 import {
   MorningExperience,
   CreativeExperience,
   ReflectionExperience,
   DiscoveryExperience,
 } from './experiences';
-import { HorizonPlanner } from './components/horizon/HorizonPlanner';
-import { QuickCaptureModal } from './components/capture/QuickCaptureModal';
-import { GlobalSearchModal } from './search/GlobalSearchModal';
 
 const AppContent: React.FC = () => {
-  const { userProfile } = useStateContext();
   const {
     activeDomain,
     activeExperience,
-    navigateToDomain,
     navigateToExperience,
-    openSearch,
+    exitExperience,
   } = useNavigation();
 
-  const [isQuickCaptureOpen, setIsQuickCaptureOpen] = useState<boolean>(false);
+  // Normalize legacy domains
+  let domain = activeDomain;
+  if (domain === 'sanctuary') domain = 'home';
+  else if (domain === 'horizon') domain = 'life';
+  else if (domain === 'atelier') domain = 'create';
+  else if (domain === 'discovery') domain = 'media';
+  else if (domain === 'memory') domain = 'more';
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#13110F] text-[#1E1B18] dark:text-[#FAF5EE] font-sans antialiased selection:bg-[#F0D5C9] dark:selection:bg-[#C97D60]/30 selection:text-[#1E1B18] dark:selection:text-[#FAF5EE] flex flex-col transition-colors duration-200">
-      {/* Top Sanctuary Bar with Experience Selector and Theme Toggle */}
-      <TopSanctuaryBar
-        user={userProfile}
-        activeExperience={activeExperience}
-        onSelectExperience={(mode) => navigateToExperience(mode)}
-        onOpenSearch={openSearch}
-      />
-
-      {/* Main Experience-Driven Content Area */}
-      <main className="flex-1 px-4 sm:px-6 pt-5 sm:pt-7 max-w-7xl mx-auto w-full">
-        <AnimatePresence mode="wait">
-          {activeDomain === 'horizon' ? (
-            <HorizonPlanner key="horizon" />
-          ) : activeExperience === 'morning' ? (
-            <MorningExperience
-              key="morning"
-              onEnterCreative={() => navigateToExperience('creative')}
-              onEnterDiscovery={() => navigateToExperience('discovery')}
-            />
-          ) : activeExperience === 'creative' ? (
-            <CreativeExperience
-              key="creative"
-              onNavigateToInspiration={() => navigateToExperience('discovery')}
-            />
-          ) : activeExperience === 'discovery' ? (
-            <DiscoveryExperience
-              key="discovery"
-              onNavigateToAtelierProject={() => navigateToExperience('creative')}
-            />
+    <SafaShell>
+      <AnimatePresence mode="wait">
+        {/* Contextual Immersion Experience Modes (if active) */}
+        {activeExperience === 'morning' ? (
+          <MorningExperience
+            key="exp-morning"
+            onEnterCreative={() => navigateToExperience('creative')}
+            onEnterDiscovery={() => navigateToExperience('discovery')}
+          />
+        ) : activeExperience === 'creative' ? (
+          <CreativeExperience
+            key="exp-creative"
+            onNavigateToInspiration={() => navigateToExperience('discovery')}
+          />
+        ) : activeExperience === 'discovery' ? (
+          <DiscoveryExperience
+            key="exp-discovery"
+            onNavigateToAtelierProject={() => navigateToExperience('creative')}
+          />
+        ) : activeExperience === 'reflection' ? (
+          <ReflectionExperience key="exp-reflection" />
+        ) : (
+          /* Core Operating System Domain Views */
+          domain === 'home' ? (
+            <HomeView key="view-home" />
+          ) : domain === 'life' ? (
+            <LifeView key="view-life" />
+          ) : domain === 'create' ? (
+            <CreateView key="view-create" />
+          ) : domain === 'media' ? (
+            <MediaView key="view-media" />
+          ) : domain === 'discover' ? (
+            <DiscoverView key="view-discover" />
           ) : (
-            <ReflectionExperience key="reflection" />
-          )}
-        </AnimatePresence>
-      </main>
-
-      {/* Floating Dock Navigation */}
-      <FloatingDock
-        activeDomain={activeDomain}
-        onSelectDomain={(domain) => navigateToDomain(domain)}
-        onOpenQuickCapture={() => setIsQuickCaptureOpen(true)}
-      />
-
-      {/* Quick Capture Bottom Sheet / Dialog */}
-      <QuickCaptureModal
-        isOpen={isQuickCaptureOpen}
-        onClose={() => setIsQuickCaptureOpen(false)}
-      />
-
-      {/* Global Studio Spotlight Search Modal (Cmd+K) */}
-      <GlobalSearchModal />
-    </div>
+            <MoreView key="view-more" />
+          )
+        )}
+      </AnimatePresence>
+    </SafaShell>
   );
 };
 

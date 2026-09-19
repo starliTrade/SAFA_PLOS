@@ -4,30 +4,52 @@ import {
   ExperienceMode,
   NavigationState,
   NavigationActions,
+  PeekItem,
 } from './navigationTypes';
-import { DOMAIN_TO_EXPERIENCE_MAP, EXPERIENCE_TO_DOMAIN_MAP } from './navigationMap';
+import { EXPERIENCE_TO_DOMAIN_MAP } from './navigationMap';
 
 export interface NavigationContextValue extends NavigationState, NavigationActions {}
 
 const NavigationContext = createContext<NavigationContextValue | null>(null);
 
 export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activeDomain, setActiveDomain] = useState<NavigationDomain>('sanctuary');
-  const [activeExperience, setActiveExperience] = useState<ExperienceMode>('morning');
+  const [activeDomain, setActiveDomain] = useState<NavigationDomain>('home');
+  const [activeExperience, setActiveExperience] = useState<ExperienceMode | null>(null);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [selectedDesignId, setSelectedDesignId] = useState<string | null>(null);
   const [selectedInspirationId, setSelectedInspirationId] = useState<string | null>(null);
+  const [peekItem, setPeekItem] = useState<PeekItem | null>(null);
   const [isQuickCaptureOpen, setIsQuickCaptureOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
 
   const navigateToDomain = useCallback(
-    (domain: NavigationDomain, params?: { projectId?: string; designId?: string }) => {
-      setActiveDomain(domain);
-      if (domain !== 'horizon') {
-        setActiveExperience(DOMAIN_TO_EXPERIENCE_MAP[domain]);
+    (
+      domain: NavigationDomain,
+      params?: {
+        projectId?: string;
+        designId?: string;
+        inspirationId?: string;
+        experience?: ExperienceMode | null;
+      }
+    ) => {
+      // Map any legacy names to canonical domains
+      let targetDomain = domain;
+      if (domain === 'sanctuary') targetDomain = 'home';
+      else if (domain === 'atelier') targetDomain = 'create';
+      else if (domain === 'discovery') targetDomain = 'discover';
+      else if (domain === 'memory') targetDomain = 'more';
+      else if (domain === 'horizon') targetDomain = 'life';
+
+      setActiveDomain(targetDomain);
+      if (params?.experience !== undefined) {
+        setActiveExperience(params.experience);
+      } else {
+        setActiveExperience(null);
       }
       if (params?.projectId !== undefined) setSelectedProjectId(params.projectId);
       if (params?.designId !== undefined) setSelectedDesignId(params.designId);
+      if (params?.inspirationId !== undefined) setSelectedInspirationId(params.inspirationId);
     },
     []
   );
@@ -41,6 +63,10 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     },
     []
   );
+
+  const exitExperience = useCallback(() => {
+    setActiveExperience(null);
+  }, []);
 
   const selectProject = useCallback((projectId: string | null) => {
     setSelectedProjectId(projectId);
@@ -58,6 +84,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const closeQuickCapture = useCallback(() => setIsQuickCaptureOpen(false), []);
   const openSearch = useCallback(() => setIsSearchOpen(true), []);
   const closeSearch = useCallback(() => setIsSearchOpen(false), []);
+  const openCommand = useCallback(() => setIsCommandOpen(true), []);
+  const closeCommand = useCallback(() => setIsCommandOpen(false), []);
 
   const value: NavigationContextValue = useMemo(
     () => ({
@@ -66,17 +94,23 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       selectedProjectId,
       selectedDesignId,
       selectedInspirationId,
+      peekItem,
       isQuickCaptureOpen,
       isSearchOpen,
+      isCommandOpen,
       navigateToDomain,
       navigateToExperience,
+      exitExperience,
       selectProject,
       selectDesign,
       selectInspiration,
+      setPeekItem,
       openQuickCapture,
       closeQuickCapture,
       openSearch,
       closeSearch,
+      openCommand,
+      closeCommand,
     }),
     [
       activeDomain,
@@ -84,17 +118,23 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       selectedProjectId,
       selectedDesignId,
       selectedInspirationId,
+      peekItem,
       isQuickCaptureOpen,
       isSearchOpen,
+      isCommandOpen,
       navigateToDomain,
       navigateToExperience,
+      exitExperience,
       selectProject,
       selectDesign,
       selectInspiration,
+      setPeekItem,
       openQuickCapture,
       closeQuickCapture,
       openSearch,
       closeSearch,
+      openCommand,
+      closeCommand,
     ]
   );
 
